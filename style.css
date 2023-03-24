@@ -3,29 +3,36 @@ body, html {
     display: flex; 
     flex-direction: column;
     align-items: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:Arial, Helvetica, sans-serif;
     margin: 0;
     color: whitesmoke;
     
-    background-color: rgb(51, 52, 48);
+    background-color: rgb(221, 94, 48);
 }
 
 .calc {
-    margin-top: 30%;
-    padding: 10px;
-    border: 1px solid red;
+    margin-top: 15%;
+    padding: 12px;
+    border: 1px solid rgb(56, 53, 53);
+    background-color: rgb(50, 46, 46);
+    border-radius: 28px;
     display: flex;
-    justify-content: center;
     flex-flow: column nowrap;
-    gap: 10px;
- 
+    gap: 7px;
 
+    min-height: 300px;
+    max-width: 350px;
+
+    box-shadow: 0px 2px 22px -3px rgba(37, 36, 36, 0.75);
+ 
 }
 
     .display { 
-        height: 100px;
-        width: 200px;
-        border: 1px solid blue;
+        height: 120px;
+        border: 2px solid rgb(27, 27, 96);
+        background-color: white;
+        border-radius: 15px;
+        margin-bottom: 8px;
         
     }
     
@@ -33,15 +40,36 @@ body, html {
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-        gap: 5px;
+        gap: 3px;
     }
 
-    .calc button { 
-        flex: 1;
-    }
+        .calc button { 
+            flex: 1;
+            height: 70px;
+            width: 80px;
+            border-radius: 10px;
+            background-color: white;
+            color: rgb(0, 0, 0);
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        button.zero { 
+            flex: 2.3;
+    
+        }
+
+        button#num { 
+          
+            border-color: black;
+        
+        }
+
 
 .footer { 
-    border: 1px solid rgb(215, 201, 201);
+    border: 1px solid rgb(56, 53, 53);
+    background-color: rgb(50, 46, 46);
+    
     border-radius: 10px;
     position: fixed;
     bottom: 0; 
@@ -49,4 +77,17 @@ body, html {
     padding: 10px;
     font-size: 13px;
     margin: 12px;
+}
+
+
+/* Link Styling */
+
+a { 
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+a:hover{
+    color:rgb(89, 186, 20);
+    transform: scale(2);
 }
