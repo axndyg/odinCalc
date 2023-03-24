@@ -1,0 +1,52 @@
+body, html { 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    color: whitesmoke;
+    
+    background-color: rgb(51, 52, 48);
+}
+
+.calc {
+    margin-top: 30%;
+    padding: 10px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    flex-flow: column nowrap;
+    gap: 10px;
+ 
+
+}
+
+    .display { 
+        height: 100px;
+        width: 200px;
+        border: 1px solid blue;
+        
+    }
+    
+    .c-row { 
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .calc button { 
+        flex: 1;
+    }
+
+.footer { 
+    border: 1px solid rgb(215, 201, 201);
+    border-radius: 10px;
+    position: fixed;
+    bottom: 0; 
+    left: 0;
+    padding: 10px;
+    font-size: 13px;
+    margin: 12px;
+}
