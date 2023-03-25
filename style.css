@@ -1,10 +1,9 @@
 /* FONT INCLUSION */
+
 @font-face{
     font-family: 'digital-font';
     src: url('./pageAssets/digital-7.ttf');
 }
-   
-
 
 body, html { 
     height: 100vh; 
@@ -28,7 +27,7 @@ body, html {
     flex-flow: column nowrap;
     gap: 7px;
 
-    min-height: 300px;
+    min-height: 530px;
     max-width: 330px;
 
     box-shadow: 0px 2px 22px -3px rgba(37, 36, 36, 0.75);
