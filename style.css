@@ -82,16 +82,44 @@ body, html {
             font-weight: 400;
         }
 
-        button.zero { 
-            flex: 2.3;
-    
-        }
+            .calc button:hover{ 
+                background-color: rgb(31, 125, 188);
+                color: whitesmoke;
+            }
 
-        button#num { 
-          
-            border-color: black;
-        
-        }
+                .calc button:active { 
+                    background-color: rgb(10, 98, 116);
+                }
+
+            button.zero { 
+                flex: 2.3;
+            }
+
+            button.equals:hover { 
+                background-color: rgb(73, 159, 73);
+            }
+
+                button.equals:active {
+                    background-color: green;
+                }
+
+            button#operand:hover { 
+                background-color: orange;
+            }
+
+                button#operand:active {
+                    background-color: rgb(255, 140, 0);
+                }
+                
+            button#func:hover { 
+                background-color: rgb(241, 55, 55);
+            }
+
+                button#func:active {
+                    background-color: rgb(255, 0, 0);
+                }
+
+
 
 
 .footer { 

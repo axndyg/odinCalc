@@ -20,6 +20,7 @@
 let operand_a = NaN; 
 let operand_b = NaN; 
 let operator = ""; 
+let sign = "";
 let result = NaN; 
 
 let a_string = "";
@@ -27,6 +28,8 @@ let b_string = "";
 
 let a_perC = 0;
 let b_perC = 0; 
+
+let in_ERR = false;
 
 
 // DOM ELEMENTS 
@@ -47,6 +50,8 @@ for (let i = 0; i < numBtns.length; i++) {
             else {
                 a_string += "" + numBtns[i].textContent;
             }
+            operand_a = parseFloat(a_string);
+            updateScreen();
         }
         else if (operator != "equals") {
             if (numBtns[i].textContent == '.' ) {
@@ -58,11 +63,12 @@ for (let i = 0; i < numBtns.length; i++) {
              else {
                  b_string += "" + numBtns[i].textContent;
              }
-
+             operand_b = parseFloat(b_string);
+             updateScreen();
         }
-        operand_a = parseFloat(a_string);
-        operand_b = parseFloat(b_string);
-        updateScreen();
+        
+        
+        
     });
 }
 
@@ -76,13 +82,27 @@ for (let i = 0; i < funcBtns.length; i++) {
 const operBtns = document.querySelectorAll('#operand');
 for (let i = 0; i < operBtns.length; i++) { 
     operBtns[i].addEventListener("click", () => {
-        if (operBtns[i].className != "equals") { 
-            operator = operBtns[i].className;
-        }
-        else {
-            arithmetic[operBtns[i].className];
-        }
+            if (operBtns[i].className == "equals") { 
+                if (operand_a  && operand_b != NaN) { 
+                    result = arithmetic[operator](operand_a, operand_b); 
 
+                    operand_a = result; 
+                    a_string = operand_a.toString();
+                    operand_b = NaN; 
+                    b_string = "";
+                    b_perC = 0; 
+                        
+                }
+                else if (operand_a) { 
+                    result = operand_a;
+                } 
+                operator = "";
+                updateScreen();
+            }
+            else { 
+                operator = operBtns[i].className;
+                sign = operBtns[i].textContent;
+            }
     })
 }
 
@@ -118,30 +138,18 @@ const arithmetic = {
     divide: (a,b) => (b != 0) ? a / b : "DIVIE BY ZERO ERROR",
 
     pow:  (a,b) => a ** b,
-    equals: () => {
-        if (operand_a && operand_b) { 
-            result = arithmetic[operator](operand_a, operand_b);
-
-            operand_a = result; 
-            operand_b = NaN; 
-            operator = a_string = b_string = "";
-            a_perC = b_perC = 0; 
-            
-            updateScreen(); 
-        }
-    },
 }
 
 
 // DOM INTERACTION
 
 function updateScreen() { 
-    if (operator) { 
-        entry_display.textContent = (!operand_b) ? b_string : operand_b;
+    if (!result)  {
+          entry_display.textContent = ((operator) ? b_string : a_string);
     }
     else {
-        entry_display.textContent = (!operand_a) ? a_string : operand_a;
+        entry_display.textContent = "";
     }
-    
     result_display.textContent = (!result) ? "" : result; 
+    result = NaN;
 }
