@@ -1,3 +1,11 @@
+/* FONT INCLUSION */
+@font-face{
+    font-family: 'digital-font';
+    src: url('./pageAssets/digital-7.ttf');
+}
+   
+
+
 body, html { 
     height: 100vh; 
     display: flex; 
@@ -21,7 +29,7 @@ body, html {
     gap: 7px;
 
     min-height: 300px;
-    max-width: 350px;
+    max-width: 330px;
 
     box-shadow: 0px 2px 22px -3px rgba(37, 36, 36, 0.75);
  
@@ -30,11 +38,32 @@ body, html {
     .display { 
         height: 120px;
         border: 2px solid rgb(27, 27, 96);
+        color: black;
         background-color: white;
         border-radius: 15px;
         margin-bottom: 8px;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 8px;
+        justify-content: space-between;
+        
+        overflow: hidden;
+
+        font-family:'digital-font';
+        font-weight: lighter;
         
     }
+
+        .display .entry {
+            font-size: 25px;
+        }
+
+        .display .result {
+            align-self: flex-end;
+            font-size: 18px;
+        }
     
     .c-row { 
         display: flex;
@@ -91,3 +120,4 @@ a:hover{
     color:rgb(89, 186, 20);
     transform: scale(2);
 }
+
