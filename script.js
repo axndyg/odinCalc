@@ -1,6 +1,16 @@
 
 // PLANNING 
 /* 
+
+    NEED TO ADD RECURSIVE continous operations if a 2nd operator is chosen after the 2nd number is in 
+        best way to do this is only update the result on equals, it should already do that 
+
+        when we have a operand_b and operator is being selected again, 
+        we should perform the arithmetic from the prior operator, store the result in operand a 
+        and proceed like normal 
+
+    also later need to add keyboard interaction 
+
     make the simple arithmetic functions 
         add
         subtract 
@@ -110,10 +120,23 @@ for (let i = 0; i < operBtns.length; i++) {
                         
                 }
                 else if (!isNaN(operand_a)) { 
-                    console.log("HERE");
                     result = operand_a;
                     operator = sign = "" ;
                 } 
+            }
+            else if (!isNaN(operand_b)) {
+                operand_a = arithmetic[operator](operand_a, operand_b);
+                a_string = operand_a.toString();
+
+                operand_b = NaN;
+                b_string = sign = operator = "";
+                b_perC = 0; 
+                nxt_NUM = in_ERR = false;  
+                
+                operator = operBtns[i].className;
+                sign = operBtns[i].textContent;
+                if (sign == "nx") sign = "pow";
+
             }
             else if (!isNaN(operand_a)) { 
                 operator = operBtns[i].className;
