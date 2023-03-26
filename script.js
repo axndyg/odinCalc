@@ -21,6 +21,7 @@ let operand_a = NaN;
 let operand_b = NaN; 
 let operator = ""; 
 let sign = "";
+
 let result = NaN; 
 
 let a_string = "";
@@ -30,12 +31,23 @@ let a_perC = 0;
 let b_perC = 0; 
 
 let in_ERR = false;
+let nxt_NUM = false;
 
 
 // DOM ELEMENTS 
 
 const entry_display = document.querySelector('.entry');
 const result_display = document.querySelector('.result');
+
+const allBtns = document.getElementsByTagName('button'); 
+for (let i = 0; i < allBtns.length; i++) {
+    allBtns[i].addEventListener("click", () => {
+            if (in_ERR) funcs.clear();
+            in_ERR = false;
+            if (result_display.textContent) result_display.textContent = "";
+        }
+    );
+}
 
 const numBtns = document.querySelectorAll("#num");
 for (let i = 0; i < numBtns.length; i++) { 
@@ -54,6 +66,7 @@ for (let i = 0; i < numBtns.length; i++) {
             updateScreen();
         }
         else if (operator != "equals") {
+            nxt_NUM = true;
             if (numBtns[i].textContent == '.' ) {
                 if (b_perC < 1) {
                     b_perC++;
@@ -83,26 +96,31 @@ const operBtns = document.querySelectorAll('#operand');
 for (let i = 0; i < operBtns.length; i++) { 
     operBtns[i].addEventListener("click", () => {
             if (operBtns[i].className == "equals") { 
-                if (operand_a  && operand_b != NaN) { 
+                
+                if (!isNaN(operand_a)  && !isNaN(operand_b) && operator) { 
+                    
                     result = arithmetic[operator](operand_a, operand_b); 
 
                     operand_a = result; 
                     a_string = operand_a.toString();
                     operand_b = NaN; 
-                    b_string = "";
+                    b_string = sign = operator = "";
                     b_perC = 0; 
+                    nxt_NUM = in_ERR = false;
                         
                 }
-                else if (operand_a) { 
+                else if (!isNaN(operand_a)) { 
+                    console.log("HERE");
                     result = operand_a;
+                    operator = sign = "" ;
                 } 
-                operator = "";
-                updateScreen();
             }
-            else { 
+            else if (!isNaN(operand_a)) { 
                 operator = operBtns[i].className;
                 sign = operBtns[i].textContent;
+                if (sign == "nx") sign = "pow";
             }
+            updateScreen();
     })
 }
 
@@ -110,12 +128,19 @@ for (let i = 0; i < operBtns.length; i++) {
 const funcs = { 
     clear: function() { 
         operand_a = operand_b = result = NaN;
-        operator = a_string = b_string = ""; 
+        operator = a_string = b_string = sign = ""; 
         a_perC = b_perC = 0; 
-        updateScreen();
+        in_ERR = nxt_NUM = false;
+        entry_display.textContent = result_display.textContent = "";
     }, 
     del: function() { 
-        if (operator == "") {
+        if (sign) { 
+            operator = sign = "";
+        }
+        else if (operand_a == "Infinity") {
+            funcs.clear();
+        }
+        else if (operator == "") {
             a_string = a_string.substring(0, a_string.length - 1);
             operand_a = parseFloat(a_string);
         }
@@ -135,8 +160,12 @@ const arithmetic = {
     subtract: (a,b) => a - b,
 
     multiply: (a,b) => a * b,
-    divide: (a,b) => (b != 0) ? a / b : "DIVIE BY ZERO ERROR",
+    divide: function(a,b) {
 
+     if (b != 0) return a / b;
+     in_ERR = true;
+     return "DIVIDE BY ZERO ERROR";
+    },
     pow:  (a,b) => a ** b,
 }
 
@@ -144,12 +173,21 @@ const arithmetic = {
 // DOM INTERACTION
 
 function updateScreen() { 
-    if (!result)  {
-          entry_display.textContent = ((operator) ? b_string : a_string);
+ 
+    if (!isNaN(result)) {
+        entry_display.textContent = "";
+        result_display.textContent = result;
+        result = NaN;
     }
     else {
-        entry_display.textContent = "";
+        if (nxt_NUM) {
+            entry_display.textContent = b_string;
+        }
+        else  {
+            entry_display.textContent = a_string;
+            if (sign) {
+                entry_display.textContent = a_string + " " + sign;
+            }
+        }
     }
-    result_display.textContent = (!result) ? "" : result; 
-    result = NaN;
 }
