@@ -53,6 +53,8 @@ body, html {
         font-family:'digital-font';
         font-weight: lighter;
         
+        border-style: inset;
+        border-color: rgb(0, 0, 0);
     }
 
         .display .entry {
@@ -80,6 +82,9 @@ body, html {
             color: rgb(0, 0, 0);
             font-size: 15px;
             font-weight: 400;
+
+            border-color: rgb(64, 57, 57);
+            border-style: inset;
         }
 
             .calc button:hover{ 
