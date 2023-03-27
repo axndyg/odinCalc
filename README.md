@@ -6,7 +6,7 @@ The course is responsible for teaching the fundamentals of web-building and prov
 
 ## Crediting 
 
-All assets were built by me (with the exception of the the calculator's screen font), under the instruction of The Odin project. 
+All assets were built by me (with the exception of the calculator's screen font), under the instruction of The Odin project. 
 
 Crediting to the digital font used is as followed: 
 
