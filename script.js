@@ -42,6 +42,7 @@ let b_perC = 0;
 
 let in_ERR = false;
 let nxt_NUM = false;
+let equal_hit = false;
 
 
 // DOM ELEMENTS 
@@ -62,6 +63,9 @@ for (let i = 0; i < allBtns.length; i++) {
 const numBtns = document.querySelectorAll("#num");
 for (let i = 0; i < numBtns.length; i++) { 
     numBtns[i].addEventListener("click", (e) => {
+        if (equal_hit) {
+           funcs.clear();
+        }
         if (operator == "") { 
             if (numBtns[i].textContent == '.' ) {
                if (a_perC < 1) { 
@@ -105,6 +109,7 @@ for (let i = 0; i < funcBtns.length; i++) {
 const operBtns = document.querySelectorAll('#operand');
 for (let i = 0; i < operBtns.length; i++) { 
     operBtns[i].addEventListener("click", () => {
+            if (equal_hit) equal_hit = false;
             if (operBtns[i].className == "equals") { 
                 
                 if (!isNaN(operand_a)  && !isNaN(operand_b) && operator) { 
@@ -123,6 +128,7 @@ for (let i = 0; i < operBtns.length; i++) {
                     result = operand_a;
                     operator = sign = "" ;
                 } 
+                equal_hit = true;
             }
             else if (!isNaN(operand_b)) {
                 operand_a = arithmetic[operator](operand_a, operand_b);
@@ -153,7 +159,7 @@ const funcs = {
         operand_a = operand_b = result = NaN;
         operator = a_string = b_string = sign = ""; 
         a_perC = b_perC = 0; 
-        in_ERR = nxt_NUM = false;
+        in_ERR = nxt_NUM = equal_hit = false;
         entry_display.textContent = result_display.textContent = "";
     }, 
     del: function() { 
